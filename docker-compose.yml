@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  oracle-free:
+    image: oracle/database-free:latest
+    container_name: oracle-free
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      - ORACLE_PWD=YourPassword123
+      - ORACLE_CHARACTERSET=AL32UTF8
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrongPassword123!
+      - MSSQL_PID=Developer
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  sql-server-winauth:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server-winauth
+    ports:
+      - "1434:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrongPassword123!
+      - MSSQL_PID=Developer
+      - MSSQL_ENABLE_HYPERV=1
+    volumes:
+      - sql_winauth_data:/var/opt/mssql
+
+volumes:
+  oracle_data:
+  sql_data:
+  sql_winauth_data:

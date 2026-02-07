@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+venv_3_12_3/
+__pycache__/
+tests/__pycache__/
+pytest.ini
